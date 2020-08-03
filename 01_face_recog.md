@@ -34,8 +34,8 @@ export default App;
 
 const Navigation = (Component) => {
 	return (
-		<nav>
-			<p>Sign Out </p>
+		<nav style={{display: 'flex', justifyContent: 'flex-end'}}>
+			<p className='f3 link dim black underline pa3 pointer'>Sign Out </p>
 		</nav>
 
 		);
@@ -52,5 +52,14 @@ Import Navigation.js to App.js:
 ```
 import Navigation from './Components/Navigation/Navigation'; 
 ```
+Install Tachyons:
+```
+npm tachyons
+
+npm install tachyons
+```
+
+In index.js: 
 
 ```
+import 'tachyons';
