@@ -26,7 +26,10 @@ export default App;
  ### Navigation ###
  
 Add Components folder in src folder
-Add Navigation folder on Components folderAdd Navigation.js file inside Navigation folder
+
+Add Navigation folder on Components folder
+
+Add Navigation.js file inside Navigation folder
  
 Install Tachyons:
 ```
@@ -44,7 +47,7 @@ import 'tachyons';
  Add following code to Navigation.js: 
  
  ```
- import React from 'react';
+import React from 'react';
 
 const Navigation = (Component) => {
 	return (
@@ -74,9 +77,10 @@ background:linear-gradient(89deg, #FF5EDF 0%, #84C8DE 100%);
 ```
 
 Create Logo folder in src and add logo.js file to it.
-Add Logo tag to App.js  and import logo file: 
 
-``
+Add Logo tag to App.js and import logo file: 
+
+```
 import React from 'react';
 import './App.css';
 import Navigation from './Components/Navigation/Navigation'; 
@@ -98,9 +102,11 @@ function App() {
 }
 
 export default App;
+
 ```
 
 Install library:
+
 ```
 npm install --save react-tilt
 ```
@@ -121,3 +127,5 @@ const Logo = (Component) => {
 }
 
 export default Navigation;
+
+```
