@@ -3,6 +3,7 @@
 Create React App
 
 Remove logo file.
+
 Remove import logo from App.js.
 
 Delete React stuff from App.js, to leave:
@@ -24,9 +25,10 @@ export default App;
  ```
  ### Navigation ###
  
- Add Components folder in src folder
- Add Navigation folder on Components folderAdd Navigation.js file inside Navigation folder
- Install Tachyons:
+Add Components folder in src folder
+Add Navigation folder on Components folderAdd Navigation.js file inside Navigation folder
+ 
+Install Tachyons:
 ```
 npm tachyons
 
