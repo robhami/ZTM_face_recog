@@ -116,16 +116,98 @@ Add to logo.js:
 ```
 
 import React from 'react';
+import Tilt from 'react-tilt';
+ 
 
 const Logo = (Component) => {
 	return (
 		<div className='ma4 mt8'>
-
+			<Tilt className="Tilt br2 shadow-2" options={{ max : 55 }} style={{ height: 150, width: 150 }} >
+	 		<div className="Tilt-inner"> 👽 </div>
+			</Tilt>
+		</div>
 		);
 
 
 }
 
-export default Navigation;
+export default Logo;
 
+```
+
+Create logo.css and add:
+```
+.Tilt {
+	background:linear-gradient(89deg, #FF5EDF 0%, #84C8DE 100%);
+}
+```
+Then import to Logo.js by adding: 
+```
+import './Logo.css'; 
+```
+
+Download brain logo then put in logo folder and import to Logo.js:
+
+```
+import brain from './brain.png'
+```
+Also edit logo component: 
+```
+const Logo = (Component) => {
+	return (
+		<div className='ma4 mt8'>
+			<Tilt className="Tilt br2 shadow-2" options={{ max : 55 }} style={{ height: 150, width: 150 }} >
+		 		<div className="Tilt-inner pa3"> 
+		 			<img style={{paddingTop: '25px'}} alt='logo'  src={brain}/>
+		 		</div>
+			</Tilt>
+		</div>
+		);
+
+
+}
+```
+Create imageLinkForm folder and file in src. 
+
+Import to App.js and add element to app component:
+```
+import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm'; 
+
+
+function App() {
+  return (
+    <div className="App">
+     <Navigation />
+    
+     <Logo />
+     <ImageLinkForm />
+    { 
+     
+     // 
+     // <FaceRecognition />
+   }
+    </div>
+  );
+}
+
+export default App;
+
+```
+Then add to ImageLinkForm.js:
+
+```
+import React from 'react';
+
+
+const ImageLinkForm = (Component) => {
+	return (
+		<div className='ma4 mt8'>
+			
+		
+		</div>
+		);
+
+
+}
+export default ImageLinkForm;
 ```
