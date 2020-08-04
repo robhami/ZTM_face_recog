@@ -2,8 +2,8 @@
 
 Create React App
 
-REmove logo file
-Remove import logo from App.js
+Remove logo file.
+Remove import logo from App.js.
 
 Delete React stuff from App.js, to leave:
 
