@@ -201,13 +201,57 @@ import React from 'react';
 
 const ImageLinkForm = (Component) => {
 	return (
-		<div className='ma4 mt8'>
-			
-		
+		<div>
+			<p className='f3'>
+				{'This Magic Brain will detect faces in your pictures. Git it and try. '}
+			</p>
+			<div className='center'>
+				<div className='form center pa4 br3 shadow-5'>
+					<input className='f4 pa-2 w-70 center' type='tex' />
+					<button className='w-30 grow f4 link ph3 pv2 dib what bg-light-purple'>Detect</button>
+				</div>
+			</div>
 		</div>
 		);
 
 
 }
 export default ImageLinkForm;
+```
+ To get everything all components centered - create in app.css: 
+
+```
+.center {
+  display: flex;
+  justify-content:center;
+
+}
+```
+
+Create ImageLinkForm .css taking pattern from https://leaverou.github.io/css3patterns/#blueprint-grid :
+```
+.form {
+	width: 700px;
+	background-color:#269;
+	background-image: linear-gradient(white 2px, transparent 2px),
+	linear-gradient(90deg, white 2px, transparent 2px),
+	linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+	linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+	background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
+```
+Then import it in ImageLinkForm.js:
+
+```
+.form {
+	width: 700px;
+	background-color:#269;
+	background-image: linear-gradient(white 2px, transparent 2px),
+	linear-gradient(90deg, white 2px, transparent 2px),
+	linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+	linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+	background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
 ```
