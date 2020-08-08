@@ -244,14 +244,50 @@ Create ImageLinkForm .css taking pattern from https://leaverou.github.io/css3pat
 Then import it in ImageLinkForm.js:
 
 ```
-.form {
-	width: 700px;
-	background-color:#269;
-	background-image: linear-gradient(white 2px, transparent 2px),
-	linear-gradient(90deg, white 2px, transparent 2px),
-	linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-	linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-	background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+import './ImageLinkForm.css';
+```
+
+Then in index.css: 
+```
+
+button {
+	cursor: pointer;
 }
+```
+This adds cursor when hover over the button. 
+
+
+Then add rank component to App.js 
+```
+import Rank from './Components/Rank/Rank'; 
+
+<Rank />
+```
+Also create Rank Folder in Components then add Rank.js. 
+
+Then add following to Rank.js: 
+
+```
+import React from 'react';
+
+
+const Rank = (Component) => {
+	return (
+		<div>
+		
+			<div className='white f3'>
+				{'Rob, your current rank is....'}
+			</div>
+
+			<div className='white f1'>
+				{'#5'}
+			</div>
+
+
+		</div>
+		);
+
+
+}
+export default Rank;
 ```
