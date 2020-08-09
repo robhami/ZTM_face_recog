@@ -291,3 +291,122 @@ const Rank = (Component) => {
 }
 export default Rank;
 ```
+
+Change font family in index.css: 
+
+```
+body {
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+ ```
+  
+  Add particles API: 
+  
+  ```
+   npm install react-particles-js 
+   
+  
+  ```
+  Paste example from npm page https://www.npmjs.com/package/react-particles-js to App.js:
+  
+  ```
+  function App() {
+  return (
+    <div className="App">
+     <Particles 
+              params={{
+                particles: {
+                  line_linked: {
+                    shadow: {
+                      enable: true,
+                      color: "#3CA9D1",
+                      blur: 5
+                    }
+                  }
+                }
+              }}
+              style={{
+                width: '100%',
+                backgroundImage: `url(${logo})` 
+              }}
+      />
+     <Navigation />
+     <Logo />
+      <Rank />
+     <ImageLinkForm />
+     
+    { 
+      // 
+     // 
+     // <FaceRecognition />
+   }
+    </div>
+  );
+}
+
+```
+Then clear out parameters and add a constant:
+```
+import Particles from 'react-particles-js';
+
+const particlesOptions = {
+  particles: {
+    line_linked: {
+      shadow: {
+        enable: true,
+        color: "#3CA9D1",
+        blur: 5
+      }
+    }
+  }
+}
+  
+function App() {
+  return (
+    <div className="App">
+     <Particles 
+     className='particles'
+     params={particlesOptions}
+      />
+     <Navigation />
+     <Logo />
+      <Rank />
+     <ImageLinkForm />
+     
+    { 
+      // 
+     // 
+     // <FaceRecognition />
+   }
+    </div>
+  );
+}
+```
+This will overwrite page and requires changes in css. When using fixed position can apply z-index, this tells you what layer you want image to be on: 
+```
+.particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index -1
+}
+```
+
+Edit const particlesOptions again: 
+
+```
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 300,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    }
+  }
+ 
+ }  
+ ```
