@@ -1,4 +1,4 @@
-
+### Create State & Add function to input ###
 Need to create state to deal with any input (i.e. our apps knows what the user entered value is, remembers it, and updates it any time in changes). 
 This is done by adding a constructor.
 Also seems like you have to change function App to a class and put render around return. 
@@ -75,6 +75,8 @@ Change console.log to get what is input into input element:
 
   }
 ```
+### Add submibutton function ###
+
 Add function to deal with button being clicked:
 ```
  onButtonSubmit = () => {
@@ -109,6 +111,7 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
 
 }
 ```
+### Get Face REcognition API and add to code ###
 
 Sign up for Clarifai API at: https://www.clarifai.com/model-gallery
 
@@ -130,7 +133,7 @@ Take code from site and add to button submit function:
     );
   }
 ```
-Use import code and API key code: 
+Use import code and API key code given in Clarifai documentation and user profile: 
 
 ```
 const Clarifai = require('clarifai');
@@ -141,6 +144,7 @@ const app = new Clarifai.App({
 ```
 Can also use React import method instead of "const Clarifai = require('clarifai');".
 
+### Create FAce Recognition Component ###
 Create FaceRecognition folder and .js file in Components folder. Then import into App.js: 
 ```
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition'; 
@@ -184,7 +188,9 @@ const FaceRecognition = (Component) => {
 
 export default FaceRecognition;
 ```
-Add to App.js below code. This uses Clarifai colour model, then console.log response from the model: 
+### Add Clarifai API info to App.js ###
+
+Add Clarifai colour model to App.js, then console.log response from the model: 
 ```
 
   class App extends Component {
@@ -242,7 +248,7 @@ Then we can pass imageUrl down to the FaceRecognition element in App.js:
 <FaceRecognition imageUrl={this.state.imageUrl}/>
 
 ```
-Then in FAceREcognition component can use imageUrl as the source by adding it as function parameter and image src:
+Then in FaceRecognition component can use imageUrl as the source by adding it as function parameter and image src:
 ```
 const FaceRecognition = ({imageUrl}) => {
 	return (
@@ -305,6 +311,8 @@ onButtonSubmit = () => {
     );
   }
   ```
+  
+### Tidy face recognition image output with styling ###
 In FaceRecognition.js, wrap image in new diuv with className absolute mt2 (absolute = positioning, mt=margin top. Then set image width to 500px then height auto scale with that width.
   
   ```
