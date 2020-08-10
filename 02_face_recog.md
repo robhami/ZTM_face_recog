@@ -75,7 +75,7 @@ Change console.log to get what is input into input element:
 
   }
 ```
-### Add submit button function ###
+### Add submit button function to App.js ###
 
 Add function to deal with button being clicked:
 ```
@@ -111,7 +111,7 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
 
 }
 ```
-### Get Face REcognition API and add to code ###
+### Get Face Recognition API and add to App.js ###
 
 Sign up for Clarifai API at: https://www.clarifai.com/model-gallery
 
@@ -144,7 +144,7 @@ const app = new Clarifai.App({
 ```
 Can also use React import method instead of "const Clarifai = require('clarifai');".
 
-### Create FAce Recognition Component ###
+### Create Face Recognition Component ###
 Create FaceRecognition folder and .js file in Components folder. Then import into App.js: 
 ```
 import FaceRecognition from './Components/FaceRecognition/FaceRecognition'; 
@@ -188,7 +188,7 @@ const FaceRecognition = (Component) => {
 
 export default FaceRecognition;
 ```
-### Add Clarifai API info to App.js ###
+### Add further Clarifai API info to App.js ###
 
 Add Clarifai colour model to App.js, then console.log response from the model: 
 ```
