@@ -1,4 +1,4 @@
-### Create State & Add function to input ###
+### Create State & Add function to input in App.js ###
 Need to create state to deal with any input (i.e. our apps knows what the user entered value is, remembers it, and updates it any time in changes). 
 This is done by adding a constructor.
 Also seems like you have to change function App to a class and put render around return. 
@@ -75,7 +75,7 @@ Change console.log to get what is input into input element:
 
   }
 ```
-### Add submibutton function ###
+### Add submit button function ###
 
 Add function to deal with button being clicked:
 ```
