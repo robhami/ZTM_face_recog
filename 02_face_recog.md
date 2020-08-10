@@ -184,8 +184,7 @@ const FaceRecognition = (Component) => {
 
 export default FaceRecognition;
 ```
-Add to App.js below code. This adds imageUrl prop to state, uses Clarifai colour model, then console.log response from the model
-: 
+Add to App.js below code. This uses Clarifai colour model, then console.log response from the model: 
 ```
 
   class App extends Component {
@@ -193,7 +192,7 @@ Add to App.js below code. This adds imageUrl prop to state, uses Clarifai colour
     super();
     this.state = {
       input: '',
-      imageUrl: ''
+    
     }
   };
 
@@ -202,9 +201,7 @@ Add to App.js below code. This adds imageUrl prop to state, uses Clarifai colour
 
   }
 
-  onButtonSubmit = () => {
-    this.SetState({imageUrl: input});
-    
+  onButtonSubmit = () => {  
     console.log('click');
     app.models.predict(
       Clarifai.COLOR_MODEL,
@@ -219,3 +216,103 @@ Add to App.js below code. This adds imageUrl prop to state, uses Clarifai colour
     );
   }
 ```
+Can find models in Clarifai NPM gitHub pages under SRC. Above will predict colours in picture with probability in console. 
+
+Add empty imageURL state, then allow it to display onButtonSubmit- so add to onButtonSubmit
+
+```
+  class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+      imageUrl: ''
+    }
+  };
+
+```
+
+```
+ onButtonSubmit = () => {
+    this.SetState({imageUrl: this.state.input});
+    
+```
+Then we can pass imageUrl down to the FaceRecognition element in App.js:
+```
+<FaceRecognition imageUrl={this.state.imageUrl}/>
+
+```
+Then in FAceREcognition component can use imageUrl as the source by adding it as function parameter and image src:
+```
+const FaceRecognition = ({imageUrl}) => {
+	return (
+		<div className='center'>
+			<img alt='' src={imageUrl} />
+		</div>
+		);
+
+
+}
+
+export default FaceRecognition;
+
+```
+Then set state of input to whatever is entered passed by onInputChange (i.e. entered into inputbox):
+```
+onInputChange = (event) => {
+
+      this.setState({input: event.target.value});
+
+  }
+  
+  ```
+  Can now change url input to this.state.input:
+  
+  ```
+   onButtonSubmit = () => {
+    this.setState({imageUrl: this.state.input});
+
+    console.log('click');
+    app.models.predict(
+      Clarifai.COLOR_MODEL,
+      this.state.input)
+    .then(
+      function(response) {
+        console.log(response);
+      },
+      function(err) {
+        // there was an error
+      }
+    );
+  }
+```
+Can then change to Face recognition model and then use initial response to create address in JSON data for bounding box (i.e. consol.log(response) first as before then navigate to data needed and add headings to get there:
+```
+onButtonSubmit = () => {
+    this.setState({imageUrl: this.state.input});
+
+    console.log('click');
+    app.models.predict(
+      Clarifai.FACE_DETECT_MODEL,
+      this.state.input)
+    .then(
+      function(response) {
+        console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+      },
+      function(err) {
+        // there was an error
+      }
+    );
+  }
+  ```
+In FaceRecognition.js, wrap image in new diuv with className absolute mt2 (absolute = positioning, mt=margin top. Then set image width to 500px then height auto scale with that width.
+  
+  ```
+  const FaceRecognition = ({imageUrl}) => {
+	return (
+		<div className='center ma'>
+			<div className='absolute mt2'>
+				<img alt='' src={imageUrl} width='500px' height='auto' />
+			</div>
+		</div>
+		);
