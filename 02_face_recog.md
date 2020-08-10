@@ -82,12 +82,12 @@ Add function to deal with button being clicked:
   }
 ```
 
-Then add to ImageLinkForm elementin App.js: 
+Also need to pass event as a prop to ImageLinkForm from/in App.js: 
 ```
 onButtonSubmit={this.onButtonSubmit}
 ```
 
-Add to ImageLinkForm.js: 
+In ImageLinkForm.js can destructure onButtonSubmit and add an onButtonSubmit event to button element: 
 ```
 const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
 	return (
@@ -109,24 +109,113 @@ const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
 
 }
 ```
+
+Sign up for Clarifai API at: https://www.clarifai.com/model-gallery
+
+Run NPM install:
 ```
-const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
+npm install clarifai
+```
+Take code from site and add to button submit function: 
+```
+ onButtonSubmit = () => {
+    console.log('click');
+    app.models.predict("a403429f2ddf4b49b307e318f00e528b", "https://samples.clarifai.com/face-det.jpg").then(
+      function(response) {
+        // do something with response
+      },
+      function(err) {
+        // there was an error
+      }
+    );
+  }
+```
+Use import code and API key code: 
+
+```
+const Clarifai = require('clarifai');
+
+const app = new Clarifai.App({
+ apiKey: "825fc9edc4d84b5a8af93639ba0cc3b4"
+});
+```
+Can also use React import method instead of "const Clarifai = require('clarifai');".
+
+Create FaceRecognition folder and .js file in Components folder. Then import into App.js: 
+```
+import FaceRecognition from './Components/FaceRecognition/FaceRecognition'; 
+```
+Then add FaceRecognition component to App.js:
+```
+ render () {
+    return (
+      <div className="App">
+       <Particles 
+       className='particles'
+        params={particlesOptions}
+        />
+       <Navigation />
+       <Logo />
+        <Rank />
+       <ImageLinkForm 
+        onInputChange={this.onInputChange} 
+        onButtonSubmit={this.onButtonSubmit}/>
+       
+       <FaceRecognition />
+  
+      </div>
+    );
+  }
+}
+```
+Then add following to FaceRecognition.js, this just adds image at bottom of page : 
+```
+import React from 'react';
+
+const FaceRecognition = (Component) => {
 	return (
-		<div>
-			<p className='f3'>
-				{'This Magic Brain will detect faces in your pictures. Git it and try. '}
-			</p>
-			<div className='center'>
-				<div className='form center pa4 br3 shadow-5'>
-					<input className='f4 pa-2 w-70 center' type='tex' onChange={onInputChange}/>
-					<button className='w-30 grow f4 link ph3 pv2 dib what bg-light-purple'
-					onClick={onButtonSubmit}
-					>Detect</button>
-				</div>
-			</div>
+		<div className='center'>
+			<img alt='' src={'https://samples.clarifai.com/face-det.jpg'} />
 		</div>
 		);
 
 
 }
+
+export default FaceRecognition;
+```
+Add to App.js below code. This adds imageUrl prop to state, uses Clarifai colour model, then console.log response from the model
+: 
+```
+
+  class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+      imageUrl: ''
+    }
+  };
+
+  onInputChange = (event) => {
+      console.log(event.target.value);
+
+  }
+
+  onButtonSubmit = () => {
+    this.SetState({imageUrl: input});
+    
+    console.log('click');
+    app.models.predict(
+      Clarifai.COLOR_MODEL,
+      "https://samples.clarifai.com/face-det.jpg")
+    .then(
+      function(response) {
+        console.log(response);
+      },
+      function(err) {
+        // there was an error
+      }
+    );
+  }
 ```
