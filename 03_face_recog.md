@@ -46,3 +46,76 @@ onButtonSubmit = () => {
     .catch(error => console.log(err));
   }
 ```
+Move response to function response- add data. infront instead of response as function parameter is data. Also call image from FaceRecognition.js and extract height and width:
+
+```
+calculateFaceLocation = (data) => {
+ 
+  const clarfaiface= data.outputs[0].data.regions[0].region_info.bounding_box;
+  const image = document.getElementById('inputimage');
+  const width =Number(image.width);
+  const height =Number(image.height);
+  console.log(width,height);
+}
+
+```
+Add id to image in FaceRecognition.js that can be called in app.js above:
+
+```
+const FaceRecognition = ({imageUrl}) => {
+	return (
+		<div className='center ma'>
+			<div className='absolute mt2'>
+				<img id='inputimage' alt='' src={imageUrl} width='500px' height='auto' />
+			</div>
+		</div>
+		);
+}
+```
+Need to return object with 4 corners for the box. 
+
+```
+
+calculateFaceLocation = (data) => {
+ 
+  const clarifaiFace= data.outputs[0].data.regions[0].region_info.bounding_box;
+  const image = document.getElementById('inputimage');
+  const width =Number(image.width);
+  const height =Number(image.height);
+  console.log(width,height);
+  return {
+    leftCol: clarifaiFace.left_col * width,
+    topRow: clarifaiFace.top_row * height,
+    rightCol: width - (clarifaiFace.right_col * width),
+    bottomRow: height -(clarifaiFace.bottom_row * height)
+  }
+}
+
+```
+Create another function to use values to create box: 
+```
+displayFaceBox = (box) => {
+  console.log(box);
+  this.setState({box: box});
+
+}
+```
+Then call displayFaceBox in onButtonSubmit function to take data from calculateFaceLocation by wrapping it as displayFaceBox's input: 
+
+```
+onButtonSubmit = () => {
+    this.setState({imageUrl: this.state.input});
+    console.log('click');
+    app.models.predict(
+      Clarifai.FACE_DETECT_MODEL,
+      this.state.input)
+    .then(response =>this.displayFaceBox(this.calculateFaceLocation(response)))
+    .catch(err => console.log(err));
+  }
+
+
+
+
+
+
+```
