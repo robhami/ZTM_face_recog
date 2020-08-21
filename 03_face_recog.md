@@ -112,10 +112,51 @@ onButtonSubmit = () => {
     .then(response =>this.displayFaceBox(this.calculateFaceLocation(response)))
     .catch(err => console.log(err));
   }
+```
+Add box to FaceRecognition element in App.js: 
+```
+<FaceRecognition box={this.state box} imageUrl={this.state.imageUrl}/>
+```
+Add box to FaceREcognition variable in FaceRecognition.js. Also create new div and give className- 'bounding-box.
+```
+import React from 'react';
+
+const FaceRecognition = ({imageUrl, box}) => {
+	return (
+		<div className='center ma'>
+			<div className='absolute mt2'>
+				<img id='inputimage' alt='' src={imageUrl} width='500px' height='auto' />
+				<div className='bounding-box'></div>
+			</div>
+		</div>
+		);
 
 
+}
 
-
-
-
+export default FaceRecognition;
+```
+Create new file in FaceRecogition folder called FaceRecognition.css. Import it to FaceRecognition.js:
+```
+import './FaceRecognition.css';
+```
+Copy css from Clarifai website:
+```
+.bounding-box {
+    position: absolute;
+    box-shadow: 0 0 0 3px #149df2 inset;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+	
+}
+```
+Then add style to bounding box div in Facerecognition.js: 
+```
+	<div className='bounding-box' 
+				style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}}></div>
 ```
