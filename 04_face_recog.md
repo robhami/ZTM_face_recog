@@ -300,6 +300,7 @@ Also import register:
 ```
 import Register from './Components/Register/Register'; 
 ```
+
 Change value to Sign In on SignIn.js:
 ```
 <div className="">
@@ -325,7 +326,7 @@ const Navigation = ({onRouteChange, isSignedIn}) => {
 	if(isSignedIn) {
 		return (
 			<nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-				<p onClick={()=> onRouteChange('signin')} className='f3 link dim black underline pa3 pointer'>Sign Out </p>
+				<p onClick={()=> onRouteChange('signout')} className='f3 link dim black underline pa3 pointer'>Sign Out </p>
 			</nav>
 			);
 			} else {
@@ -340,7 +341,7 @@ const Navigation = ({onRouteChange, isSignedIn}) => {
 
 export default Navigation;
 ```
-Change onRouteChange function:
+Change onRouteChange function in App.js:
 ```
 onRouteChange = (route) => {
     if(route === 'signout') {
@@ -351,8 +352,67 @@ onRouteChange = (route) => {
       this.setState({route: route});
   }
   ```
+  Also isSignedIn state:
+  ```
+  class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+      imageUrl: '',
+      box: {},
+      route: 'signin',
+      isSignedIn: false
+    }
+  };
+  
+  
+  ```
   Then change Navigation Element on App.js: 
   ```
  <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
  ```
-  
+   Tidy up: 
+   
+   Remove console.log(box)
+   
+   Use destructuring to reduce this.state usage. Allows removal of this.state from all things listed in destructuring:
+   
+   ```
+    render () {
+    const {isSignedIn, imageUrl, route, box} = this.state;
+    return (
+      <div className="App">
+       <Particles 
+       className='particles'
+        params={particlesOptions}
+        />
+       <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+       {this.state.route === 'home' 
+        ? <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm 
+            onInputChange={this.onInputChange} 
+            onButtonSubmit={this.onButtonSubmit}/>
+
+            <FaceRecognition box={box} imageUrl={imageUrl}/>
+           </div>
+           : (
+              route === 'signin' 
+              ? <SignIn onRouteChange={this.onRouteChange}/>
+              : <Register onRouteChange={this.onRouteChange}/>
+            )       
+        }
+      </div>
+    );
+  }
+```
+Fix console.log error message saying:
+```
+index.js:1 Warning: Invalid DOM property `for`. Did you mean `htmlFor`?
+```
+As can't use for= in JSX so change all these to htmlFor in SignIn.js and Register.js. 
+
+
+Need to change form element to div because it is automatically submitting due to onSubmit event with type=submit. 
